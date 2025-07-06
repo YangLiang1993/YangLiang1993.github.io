@@ -1,68 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="梁阳的中英文个人主页" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="梁阳的中英文个人主页"/>
   <title>梁阳的主页 | Liang Yang</title>
   <style>
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
-      background: url('bg.jpg') center/cover no-repeat fixed;
-      color: #fff;
+      background-color: #C5DDE8;
+      color: #333;
       text-align: center;
     }
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      min-height: 100vh;
-    }
+    .overlay { padding: 2rem; min-height: 100vh; }
     .avatar {
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      border: 4px solid #fff;
+      border: 4px solid #333;
       object-fit: cover;
       margin: 1rem auto;
     }
-    h1 {
-      font-size: 2.5rem;
-      margin: 0.5rem 0;
-    }
+    h1 { font-size: 2.5rem; margin: 0.5rem 0; }
     section {
       max-width: 800px;
       margin: 2rem auto;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255,255,255,0.4);
       border-radius: 12px;
       padding: 1.5rem;
       text-align: left;
     }
-    h2 {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.3rem;
-    }
-    p, li {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    a {
-      color: #ffd700;
-      text-decoration: none;
-    }
-    .contact {
-      margin-top: 1rem;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
+    h2 { border-bottom: 1px solid #999; padding-bottom: 0.3rem; }
+    p, li { font-size: 1rem; line-height: 1.6; }
+    a { color: #004e6e; text-decoration: none; }
+    .contact { margin-top: 1rem; font-size: 1rem; line-height: 1.8; }
     .lang-switcher {
       position: absolute;
       top: 1rem;
       right: 1rem;
     }
     .lang-switcher button {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.6);
+      color: #000;
       border: none;
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -78,13 +58,13 @@
       <button onclick="setLang('en')">🇬🇧 English</button>
     </div>
 
-    <img class="avatar" src="profile.jpg" alt="梁阳头像" />
+    <img class="avatar" src="profile.jpg" alt="梁阳头像"/>
     <h1 id="name">你好，我是梁阳</h1>
     <p id="intro">欢迎来到我的个人主页！这里展示我的项目、研究与联系方式。</p>
     <div class="contact" id="contact">
-      📧 邮箱：<a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
-      💼 GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
-      📷 小红书：<a href="#" target="_blank">山南水北（6971533512）</a>
+      📧 邮箱1：<a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
+      📧 邮箱2：<a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
+      📷 小红书：<a href="#" target="_blank">山南水北（小红书号：6971533512）</a>
     </div>
 
     <section id="about">
@@ -92,12 +72,20 @@
       <p>我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。</p>
     </section>
 
+    <section id="education">
+      <h2>🎓 教育经历</h2>
+      <ul>
+        <li>上海交通大学，本科，建筑学专业</li>
+        <li>同济大学，硕士，建筑学专业；期间曾赴德国柏林工业大学 建筑学院（第六学院）交换学习</li>
+        <li>米兰理工大学，博士，建筑与城市研究学院；期间曾赴荷兰代尔夫特理工大学 建筑与建筑环境学院 访学</li>
+      </ul>
+    </section>
+
     <section id="papers">
       <h2>📚 代表论文</h2>
       <ul>
         <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
         <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
-        <li>更多内容可见 <a href="https://github.com/你的用户名" target="_blank">我的GitHub主页</a></li>
       </ul>
     </section>
   </div>
@@ -107,31 +95,41 @@
       zh: {
         name: "你好，我是梁阳",
         intro: "欢迎来到我的个人主页！这里展示我的项目、研究与联系方式。",
-        contact: `📧 邮箱：<a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
-                  💼 GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
-                  📷 小红书：<a href="#" target="_blank">山南水北（6971533512）</a>`,
+        contact: `📧 邮箱1：<a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
+                  📧 邮箱2：<a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
+                  📷 小红书：<a href="#" target="_blank">山南水北（小红书号：6971533512）</a>`,
         aboutTitle: "🧭 关于我",
         aboutText: "我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。",
+        educationTitle: "🎓 教育经历",
+        educationHTML: `<ul>
+          <li>上海交通大学，本科，建筑学专业</li>
+          <li>同济大学，硕士，建筑学专业；期间曾赴德国柏林工业大学 建筑学院（第六学院）交换学习</li>
+          <li>米兰理工大学，博士，建筑与城市研究学院；期间曾赴荷兰代尔夫特理工大学 建筑与建筑环境学院 访学</li>
+        </ul>`,
         papersTitle: "📚 代表论文",
-        papersText: `<ul>
+        papersHTML: `<ul>
           <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
           <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
-          <li>更多内容可见 <a href="https://github.com/你的用户名" target="_blank">我的GitHub主页</a></li>
         </ul>`
       },
       en: {
         name: "Hi, I'm Liang Yang",
         intro: "Welcome to my homepage! Here you'll find my research, projects, and contact information.",
-        contact: `📧 Email: <a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
-                  💼 GitHub: <a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
-                  📷 Xiaohongshu: <a href="#" target="_blank">Shannan Shuibei (6971533512)</a>`,
+        contact: `📧 Email 1: <a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
+                  📧 Email 2: <a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
+                  📷 Xiaohongshu: <a href="#" target="_blank">Shannan Shuibei (XHS ID: 6971533512)</a>`,
         aboutTitle: "🧭 About Me",
-        aboutText: "I’m a university lecturer researching urban imageability, walkability, and AI-powered spatial perception. My work combines urban data, public perception, and multimodal AI.",
+        aboutText: "I'm a university lecturer focusing on urban spatial perception and AI integration. My research covers urban imageability, walkability, social media-based spatial analysis, and multimodal AI methods.",
+        educationTitle: "🎓 Education",
+        educationHTML: `<ul>
+          <li>Bachelor: Architecture, Shanghai Jiao Tong University</li>
+          <li>Master: Architecture, Tongji University; exchange at Technische Universität Berlin, Institute of Architecture (Faculty VI – Planning, Building, Environment)</li>
+          <li>PhD: Architecture and Urban Studies, Politecnico di Milano; visiting researcher at Delft University of Technology, Faculty of Architecture and the Built Environment</li>
+        </ul>`,
         papersTitle: "📚 Publications",
-        papersText: `<ul>
+        papersHTML: `<ul>
           <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
           <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
-          <li>See more on <a href="https://github.com/你的用户名" target="_blank">my GitHub</a></li>
         </ul>`
       }
     };
@@ -142,11 +140,13 @@
       document.getElementById("contact").innerHTML = content[lang].contact;
       document.querySelector("#about h2").innerText = content[lang].aboutTitle;
       document.querySelector("#about p").innerText = content[lang].aboutText;
+      document.querySelector("#education h2").innerText = content[lang].educationTitle;
+      document.querySelector("#education ul")?.remove();
+      document.querySelector("#education").insertAdjacentHTML("beforeend", content[lang].educationHTML);
       document.querySelector("#papers h2").innerText = content[lang].papersTitle;
       document.querySelector("#papers ul")?.remove();
-      document.querySelector("#papers").insertAdjacentHTML("beforeend", content[lang].papersText);
+      document.querySelector("#papers").insertAdjacentHTML("beforeend", content[lang].papersHTML);
     }
   </script>
 </body>
 </html>
-
