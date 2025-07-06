@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="欢迎来到梁阳的个人主页" />
-  <title>梁阳的主页</title>
+  <meta name="description" content="梁阳的中英文个人主页" />
+  <title>梁阳的主页 | Liang Yang</title>
   <style>
     body {
       margin: 0;
@@ -15,12 +15,8 @@
     }
     .overlay {
       background-color: rgba(0, 0, 0, 0.6);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       padding: 2rem;
+      min-height: 100vh;
     }
     .avatar {
       width: 150px;
@@ -28,24 +24,129 @@
       border-radius: 50%;
       border: 4px solid #fff;
       object-fit: cover;
-      margin-bottom: 1rem;
+      margin: 1rem auto;
     }
     h1 {
       font-size: 2.5rem;
       margin: 0.5rem 0;
     }
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+    }
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+    p, li {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+    .contact {
+      margin-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    .lang-switcher button {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 0.5rem;
     }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <img class="avatar" src="profile.jpg" alt="头像" />
-    <h1>你好，我是梁阳</h1>
-    <p>欢迎来到我的主页！这里展示我的项目、爱好与联系方式。</p>
+    <div class="lang-switcher">
+      <button onclick="setLang('zh')">🇨🇳 中文</button>
+      <button onclick="setLang('en')">🇬🇧 English</button>
+    </div>
+
+    <img class="avatar" src="profile.jpg" alt="梁阳头像" />
+    <h1 id="name">你好，我是梁阳</h1>
+    <p id="intro">欢迎来到我的个人主页！这里展示我的项目、研究与联系方式。</p>
+    <div class="contact" id="contact">
+      📧 邮箱：<a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
+      💼 GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
+      📷 小红书：<a href="#" target="_blank">山南水北（6971533512）</a>
+    </div>
+
+    <section id="about">
+      <h2>🧭 关于我</h2>
+      <p>我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。</p>
+    </section>
+
+    <section id="papers">
+      <h2>📚 代表论文</h2>
+      <ul>
+        <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
+        <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
+        <li>更多内容可见 <a href="https://github.com/你的用户名" target="_blank">我的GitHub主页</a></li>
+      </ul>
+    </section>
   </div>
+
+  <script>
+    const content = {
+      zh: {
+        name: "你好，我是梁阳",
+        intro: "欢迎来到我的个人主页！这里展示我的项目、研究与联系方式。",
+        contact: `📧 邮箱：<a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
+                  💼 GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
+                  📷 小红书：<a href="#" target="_blank">山南水北（6971533512）</a>`,
+        aboutTitle: "🧭 关于我",
+        aboutText: "我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。",
+        papersTitle: "📚 代表论文",
+        papersText: `<ul>
+          <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
+          <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
+          <li>更多内容可见 <a href="https://github.com/你的用户名" target="_blank">我的GitHub主页</a></li>
+        </ul>`
+      },
+      en: {
+        name: "Hi, I'm Liang Yang",
+        intro: "Welcome to my homepage! Here you'll find my research, projects, and contact information.",
+        contact: `📧 Email: <a href="mailto:liangyang@example.com">liangyang@example.com</a><br>
+                  💼 GitHub: <a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a><br>
+                  📷 Xiaohongshu: <a href="#" target="_blank">Shannan Shuibei (6971533512)</a>`,
+        aboutTitle: "🧭 About Me",
+        aboutText: "I’m a university lecturer researching urban imageability, walkability, and AI-powered spatial perception. My work combines urban data, public perception, and multimodal AI.",
+        papersTitle: "📚 Publications",
+        papersText: `<ul>
+          <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
+          <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
+          <li>See more on <a href="https://github.com/你的用户名" target="_blank">my GitHub</a></li>
+        </ul>`
+      }
+    };
+
+    function setLang(lang) {
+      document.getElementById("name").innerHTML = content[lang].name;
+      document.getElementById("intro").innerHTML = content[lang].intro;
+      document.getElementById("contact").innerHTML = content[lang].contact;
+      document.querySelector("#about h2").innerText = content[lang].aboutTitle;
+      document.querySelector("#about p").innerText = content[lang].aboutText;
+      document.querySelector("#papers h2").innerText = content[lang].papersTitle;
+      document.querySelector("#papers ul")?.remove();
+      document.querySelector("#papers").insertAdjacentHTML("beforeend", content[lang].papersText);
+    }
+  </script>
 </body>
 </html>
+
