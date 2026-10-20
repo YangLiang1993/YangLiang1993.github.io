@@ -1,154 +1,225 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="梁阳的中英文个人主页"/>
-  <meta name="google-site-verification" content="-V4ECKEB_45LTXFZtDDAfcXt5CZmBePt-QyDBrDCqEQ" />
+  <meta name="description" content="梁阳的中英文个人主页：宜居城市、人工智能、虚拟现实、城市大数据与可持续设计。"/>
+  <meta name="google-site-verification" content="-V4ECKEB_45LTXFZtDDAfcXt5CZmBePt-QyDBrDCqEQ"/>
   <title>梁阳的主页 | Liang Yang</title>
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background-color: #C5DDE8;
-      color: #333;
-      text-align: center;
-    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; background: #C5DDE8; color: #333; text-align: center; }
     .overlay { padding: 2rem; min-height: 100vh; }
-    .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 4px solid #333;
-      object-fit: cover;
-      margin: 1rem auto;
-    }
-    h1 { font-size: 2.5rem; margin: 0.5rem 0; }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      background-color: rgba(255,255,255,0.4);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: left;
-    }
-    h2 { border-bottom: 1px solid #999; padding-bottom: 0.3rem; }
-    p, li { font-size: 1rem; line-height: 1.6; }
+    header, main, footer { max-width: 900px; margin: auto; }
+    .lang-switcher { display: flex; justify-content: flex-end; gap: .5rem; margin-bottom: 1rem; }
+    button { font: inherit; background: rgba(255,255,255,.6); color: #173b4b; border: 1px solid transparent; padding: .5rem 1rem; cursor: pointer; border-radius: 6px; }
+    button[aria-pressed="true"] { background: #004e6e; color: white; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #146c94; outline-offset: 4px; }
+    .avatar { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #333; object-fit: cover; margin: 1rem auto; }
+    h1 { font-size: 2.5rem; margin: .5rem 0; }
+    section { margin: 1.5rem auto; background: rgba(255,255,255,.5); border-radius: 12px; padding: 1.5rem 1.75rem; text-align: left; scroll-margin-top: 1rem; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid #9fb7c2; padding-bottom: .65rem; margin-top: 0; line-height: 1.5; }
+    p, li { font-size: 1rem; line-height: 1.85; overflow-wrap: anywhere; }
+    li + li { margin-top: .75rem; }
+    ul { padding-left: 1.4rem; margin-bottom: 0; }
     a { color: #004e6e; text-decoration: none; }
-    .contact { margin-top: 1rem; font-size: 1rem; line-height: 1.8; }
-    .lang-switcher {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-    }
-    .lang-switcher button {
-      background: rgba(255, 255, 255, 0.6);
-      color: #000;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-left: 0.5rem;
-    }
+    a:hover { text-decoration: underline; }
+    .contact { margin-top: 1rem; font-size: 1rem; line-height: 1.9; overflow-wrap: anywhere; }
+    .ranking { color: #4c6069; font-size: .92em; }
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    .tags span { background: #d4e8f0; color: #17475c; padding: .3rem .75rem; border-radius: 20px; }
+    nav { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1rem; margin: 1.75rem 0; line-height: 1.7; }
+    footer { padding: 1rem 0; color: #4c6069; font-size: .9rem; }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) { .overlay { padding: 1rem; } section { padding: 1.15rem; } h1 { font-size: 2rem; } h2 { font-size: 1.2rem; } .avatar { width: 130px; height: 130px; } }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="lang-switcher">
-      <button onclick="setLang('zh')">🇨🇳 中文</button>
-      <button onclick="setLang('en')">🇬🇧 English</button>
+<div class="overlay">
+  <header>
+    <div class="lang-switcher" role="group" aria-label="Language / 语言">
+      <button type="button" id="lang-zh" onclick="setLang('zh')" aria-pressed="true">中文</button>
+      <button type="button" id="lang-en" onclick="setLang('en')" aria-pressed="false">English</button>
     </div>
-
-    <img class="avatar" src="profile.jpg" alt="梁阳头像"/>
-    <h1 id="name">你好，我是梁阳</h1>
-    <p id="intro">欢迎来到我的个人主页！有任何学术讨论与合作欢迎与我联系</p>
-    <div class="contact" id="contact">
-      📧 邮箱1：<a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
-      📧 邮箱2：<a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
-      📷 小红书：<a href="#" target="_blank">山南水北（小红书号：6971533512）</a>
+    <img class="avatar" src="profile.jpg" alt="梁阳 / Liang Yang" width="150" height="150"/>
+    <h1><span data-lang="zh">你好，我是梁阳</span><span data-lang="en" hidden>Hi, I'm Liang Yang</span></h1>
+    <p data-lang="zh"><strong>梁阳，意大利米兰理工大学博士，桂林电子科技大学艺术与设计学院、计算机与信息安全学院硕士生导师。</strong></p>
+    <p data-lang="en" hidden><strong>Liang Yang holds a PhD from Politecnico di Milano, Italy, and supervises master&#8217;s students at the School of Art and Design and the School of Computer Science and Information Security, Guilin University of Electronic Technology.</strong></p>
+    <div class="contact">
+      📧 <a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
+      📧 <a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
+      <span data-lang="zh">📷 小红书：山南水北（小红书号：6971533512）</span>
+      <span data-lang="en" hidden>📷 Rednote: Shannan Shuibei (XHS ID: 6971533512)</span>
     </div>
-
+  </header>
+  <main data-lang="zh" id="content-zh">
+    <nav aria-label="页面导航"><a href="#about">基本情况</a><a href="#education">教育与经历</a><a href="#research">研究方向</a><a href="#projects">科研项目</a><a href="#papers">学术论文</a><a href="#teaching">教学成果</a><a href="#service">学术活动</a><a href="#mentoring">学生指导</a><a href="#honors">主要荣誉</a><a href="#practice">专业实践</a></nav>
     <section id="about">
-      <h2>🧭 关于我</h2>
-      <p>我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。</p>
+      <h2>一、基本情况</h2>
+      <p>梁阳，博士，桂林电子科技大学艺术与设计学院专任教师。</p>
+      <p><strong>研究方向：宜居城市，人工智能，虚拟现实，城市大数据，可持续设计。</strong></p>
+      <div class="tags"><span>宜居城市</span><span>人工智能</span><span>虚拟现实</span><span>城市大数据</span><span>可持续设计</span></div>
     </section>
-
     <section id="education">
-      <h2>🎓 教育经历</h2>
+      <h2>二、教育背景、工作经历及国际学术经历</h2>
       <ul>
-        <li>上海交通大学，本科，建筑学专业</li>
-        <li>同济大学，硕士，建筑学专业；期间曾赴德国柏林工业大学 建筑学院（第六学院）交换学习</li>
-        <li>米兰理工大学，博士，建筑与城市研究学院；期间曾赴荷兰代尔夫特理工大学 建筑与建筑环境学院 访学</li>
+        <li><strong>2011.09—2016.06，上海交通大学</strong>，船舶海洋与建筑工程学院，建筑学专业，本科（五年制）。<span class="ranking">（QS世界排名第36位，建筑学科排名第24位。）</span></li>
+        <li><strong>2016.09—2019.06，同济大学</strong>，建筑与城市规划学院，建筑学，硕士。<span class="ranking">（QS世界排名第146位，建筑学科排名第11位。）</span></li>
+        <li><strong>2017.07，澳大利亚墨尔本大学</strong>，建筑、建造与规划学院，交流访问。</li>
+        <li><strong>2017.09—2018.03，德国柏林工业大学</strong>，规划、建筑与环境学院，交流访问。</li>
+        <li><strong>2019.11—2024.05，意大利米兰理工大学</strong>，城市规划、设计与政策专业，博士，国家公派留学。<span class="ranking">（QS世界排名并列第87位，建筑学科排名第6位。）</span></li>
+        <li><strong>2022.03—2022.09，荷兰代尔夫特理工大学</strong>，建筑与建成环境学院，城市设计方向，客座研究员。<span class="ranking">（QS世界排名第47位，建筑学科排名第2位。）</span></li>
+        <li>博士阶段师从米兰理工大学 <strong>Andrea Rolando 教授</strong>，并在代尔夫特理工大学 <strong>Stefan van der Spek 教授</strong>团队开展客座研究。</li>
+        <li><strong>2024.08至今，桂林电子科技大学</strong>，艺术与设计学院，专任教师。</li>
       </ul>
     </section>
-
+    <section id="research">
+      <h2>三、主要研究方向</h2>
+      <ul>
+        <li><strong>生成式人工智能与城市空间智能优化：</strong>生成式AI、可控生成、城市街景优化、城市更新与环境评价。</li>
+        <li><strong>增强现实与数字城市设计：</strong>AR、WebAR、VR等技术在城市设计、空间决策及公众参与中的应用。</li>
+        <li><strong>城市大数据与主动出行：</strong>基于GPS轨迹、空间大数据及环境数据开展步行、骑行行为与城市空间研究。</li>
+        <li><strong>城市步行性与宜居环境评价：</strong>研究建成环境、城市空间品质与居民行为之间的关系。</li>
+      </ul>
+    </section>
+    <section id="projects">
+      <h2>四、主持科研项目</h2>
+      <p><strong>国家自然科学基金青年科学基金项目（C类）负责人</strong></p>
+      <p>项目名称：<strong>“基于生成式人工智能和增强现实的城市街道可步行性优化与决策机制研究”</strong><br>研究期限：2026—2028年；项目状态：在研。</p>
+    </section>
     <section id="papers">
-      <h2>📚 代表论文</h2>
+      <h2>五、代表性学术论文</h2>
       <ul>
-        <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
-        <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
+        <li>（SSCI，第一作者）Liang, Y., Rolando, A., Van der Spek, S. (2026). <strong>Toward User-Inclusive, Purpose-Specific, and Context-Sensitive Walkability Measurement: A Review of 46 Instruments Through an Adapted Walking-Needs Framework.</strong> <i>Land</i>, 15, 1168.</li>
+        <li>（SSCI，第一作者）Liang, Y. (2025). <strong>Active Mobility in the Green Space: A Spatial and Temporal Analysis of Indro Montanelli Park.</strong> <i>Journal of Transport &amp; Health</i>, 42, 102018.</li>
+        <li>（SCI，第一作者）Liang, Y., Rolando, A., Van der Spek, S. (2025). <strong>Transport Infrastructure Renewal and Active Mobility: A Longitudinal Analysis of Pedestrian and Cyclist Behavior Across Demographic and Temporal Dimensions.</strong> <i>Transportation Planning and Technology</i>, 1–39.</li>
+        <li>Liang, Y., D’Uva, D., Scandiffio, A., Rolando, A. (2022). <strong>The More Walkable, the More Livable? Can Urban Attractiveness Improve Urban Vitality?</strong> <i>Transportation Research Procedia</i>, 60, 322–329.</li>
+        <li>Zheng, H., Guo, Z., Liang, Y. (2019). <strong>Iterative Pattern Design via Decodes Python Scripts in Grasshopper.</strong> <i>Proceedings of the 18th CAAD Futures Conference</i>.</li>
       </ul>
     </section>
-  </div>
-
-  <script>
-    const content = {
-      zh: {
-        name: "你好，我是梁阳",
-        intro: "欢迎来到我的个人主页！这里展示我的项目、研究与联系方式。",
-        contact: `📧 邮箱1：<a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
-                  📧 邮箱2：<a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
-                  📷 小红书：<a href="#" target="_blank">山南水北（小红书号：6971533512）</a>`,
-        aboutTitle: "🧭 关于我",
-        aboutText: "我是一名关注城市空间感知与人工智能融合研究的青年教师，研究方向包括城市意象、街道可步行性、社交媒体感知分析、多模态模型应用等。",
-        educationTitle: "🎓 教育经历",
-        educationHTML: `<ul>
-          <li>上海交通大学，本科，建筑学专业</li>
-          <li>同济大学，硕士，建筑学专业；期间曾赴德国柏林工业大学 建筑学院（第六学院）交换学习</li>
-          <li>米兰理工大学，博士，建筑与城市研究学院；期间曾赴荷兰代尔夫特理工大学 建筑与建筑环境学院 访学</li>
-        </ul>`,
-        papersTitle: "📚 代表论文",
-        papersHTML: `<ul>
-          <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
-          <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
-        </ul>`
-      },
-      en: {
-        name: "Hi, I'm Liang Yang",
-        intro: "Welcome to my homepage! Feel free to contact me for any academic discussion and collaboration!",
-        contact: `📧 Email 1: <a href="mailto:yang.liang@polimi.it">yang.liang@polimi.it</a><br>
-                  📧 Email 2: <a href="mailto:liangyang@guet.edu.cn">liangyang@guet.edu.cn</a><br>
-                  📷 Rednote: <a href="#" target="_blank">Shannan Shuibei (XHS ID: 6971533512)</a>`,
-        aboutTitle: "🧭 About Me",
-        aboutText: "I'm a university lecturer focusing on urban spatial perception and AI integration. My research covers urban imageability, walkability, social media-based spatial analysis, and multimodal AI methods.",
-        educationTitle: "🎓 Education",
-        educationHTML: `<ul>
-          <li>Bachelor: Architecture, Shanghai Jiao Tong University</li>
-          <li>Master: Architecture, Tongji University; exchange at Technische Universität Berlin, Institute of Architecture (Faculty VI – Planning, Building, Environment)</li>
-          <li>PhD: Architecture and Urban Studies, Politecnico di Milano; visiting researcher at Delft University of Technology, Faculty of Architecture and the Built Environment</li>
-        </ul>`,
-        papersTitle: "📚 Publications",
-        papersHTML: `<ul>
-          <li>Liang, Y. (2024). <i>Active Mobility in the Green Space</i>. <a href="#">Journal of Transport & Health</a>.</li>
-          <li>Liang, Y. (2022). <i>The more walkable, the more livable?</i> Transportation Research Procedia, 60, 322–329.</li>
-        </ul>`
+    <section id="teaching">
+      <h2>六、教育教学改革成果</h2>
+      <ul>
+        <li>（ESCI, Scopus）Liang, Y., et al. (2026). <strong>Integrating Generative AI and WebAR Into Environmental Design Education: A Project-Based Classroom Case Study.</strong> <i>Journal of Information Technology Education: Innovations in Practice (JITE:IIP)</i>。围绕<strong>生成式人工智能、WebAR与环境设计项目式教学</strong>开展教学改革研究。</li>
+        <li>梁阳，雷鹏，杨兵，李一媛. <strong>《融合AI与AR的信息设计基础课程项目式教学改革探索——以桂林电子科技大学为例》</strong>，围绕AI与AR融合、项目式教学及数字媒体专业课程改革开展研究。</li>
+      </ul>
+    </section>
+    <section id="service">
+      <h2>七、学术兼职与国际学术活动</h2>
+      <ul><li>国际学术期刊 <strong>《Sustainable Futures》客座主编</strong>。</li><li><strong>City+ 2021@Milan 国际会议承办人、City+ Network组委会核心成员</strong>，参与国际城市研究学术网络组织与交流。</li></ul>
+    </section>
+    <section id="mentoring">
+      <h2>八、学生指导与人才培养</h2>
+      <ul>
+        <li>指导学生参加<strong>中国大学生工程实践与创新能力大赛（虚拟仿真赛道·工程场景数字化赛项）</strong>，获<strong>全国总决赛二等奖、广西赛区金奖</strong>。该赛事为<strong>教育部A类学科竞赛</strong>。</li>
+        <li>指导自治区级大学生创新创业训练计划项目<strong>“银龄回忆录”</strong>，在研。</li>
+        <li>持续指导本科生、硕士研究生围绕<strong>生成式人工智能、数字媒体技术、城市空间数字化、AI辅助设计与XR应用</strong>开展科研训练与创新实践。</li>
+      </ul>
+    </section>
+    <section id="honors">
+      <h2>九、主要荣誉</h2>
+      <ul><li><strong>2024年意大利米兰理工大学优秀博士</strong></li><li><strong>2014年上海交通大学国家奖学金（专业第1）</strong></li><li><strong>2016年上海交通大学优秀毕业生</strong></li><li><strong>2019年同济大学建筑与城市规划学院优秀硕士毕业论文提名</strong></li><li><strong>2024年未来设计师·全国艺术设计教师教学创新大赛广西赛区三等奖</strong></li></ul>
+    </section>
+    <section id="practice">
+      <h2>十、专业实践与国际联合设计经历</h2>
+      <ul><li>参与<strong>上海博物馆东馆新建工程</strong>、<strong>二里头夏都遗址博物馆新建工程</strong>等国家及地方重大文化工程建筑设计实践。</li><li>参加<strong>同济大学—墨尔本大学联合设计</strong>、<strong>上海交通大学—印度孟买KRVIA建筑学院联合设计</strong>等国际联合教学与城市设计实践。</li></ul>
+    </section>
+  </main>
+  <main data-lang="en" id="content-en" lang="en" hidden>
+    <nav aria-label="Page navigation"><a href="#about-en">About</a><a href="#education-en">Experience</a><a href="#research-en">Research</a><a href="#projects-en">Projects</a><a href="#papers-en">Publications</a><a href="#teaching-en">Teaching</a><a href="#service-en">Service</a><a href="#mentoring-en">Mentoring</a><a href="#honors-en">Honors</a><a href="#practice-en">Practice</a></nav>
+    <section id="about-en">
+      <h2>1. About Me</h2>
+      <p>Liang Yang, PhD, is a faculty member at the School of Art and Design, Guilin University of Electronic Technology.</p>
+      <p><strong>Research interests: livable cities, artificial intelligence, virtual reality, urban big data, and sustainable design.</strong></p>
+      <div class="tags"><span>Livable Cities</span><span>Artificial Intelligence</span><span>Virtual Reality</span><span>Urban Big Data</span><span>Sustainable Design</span></div>
+    </section>
+    <section id="education-en">
+      <h2>2. Education, Employment &amp; International Academic Experience</h2>
+      <ul>
+        <li><strong>Sep 2011–Jun 2016 · Shanghai Jiao Tong University.</strong> Five-year bachelor's degree in Architecture, School of Naval Architecture, Ocean and Civil Engineering. <span class="ranking">(QS world ranking: 36; architecture ranking: 24.)</span></li>
+        <li><strong>Sep 2016–Jun 2019 · Tongji University.</strong> Master's degree in Architecture, College of Architecture and Urban Planning. <span class="ranking">(QS world ranking: 146; architecture ranking: 11.)</span></li>
+        <li><strong>Jul 2017 · University of Melbourne, Australia.</strong> Academic exchange visit, Faculty of Architecture, Building and Planning.</li>
+        <li><strong>Sep 2017–Mar 2018 · Technische Universität Berlin, Germany.</strong> Academic exchange, Faculty of Planning, Building and Environment.</li>
+        <li><strong>Nov 2019–May 2024 · Politecnico di Milano, Italy.</strong> PhD in Urban Planning, Design and Policy, supported by a Chinese government scholarship. <span class="ranking">(QS world ranking: joint 87; architecture ranking: 6.)</span></li>
+        <li><strong>Mar 2022–Sep 2022 · Delft University of Technology, the Netherlands.</strong> Visiting researcher in Urban Design, Faculty of Architecture and the Built Environment. <span class="ranking">(QS world ranking: 47; architecture ranking: 2.)</span></li>
+        <li>Doctoral research supervised by <strong>Professor Andrea Rolando</strong> at Politecnico di Milano; visiting research with <strong>Professor Stefan van der Spek's</strong> team at Delft University of Technology.</li>
+        <li><strong>Aug 2024–present · Guilin University of Electronic Technology.</strong> Full-time faculty member, School of Art and Design.</li>
+      </ul>
+    </section>
+    <section id="research-en">
+      <h2>3. Research Areas</h2>
+      <ul>
+        <li><strong>Generative AI and Intelligent Optimization of Urban Space:</strong> generative AI, controllable generation, streetscape improvement, urban regeneration, and environmental assessment.</li>
+        <li><strong>Augmented Reality and Digital Urban Design:</strong> applications of AR, WebAR, and VR in urban design, spatial decision-making, and public participation.</li>
+        <li><strong>Urban Big Data and Active Mobility:</strong> walking, cycling, and urban space research using GPS trajectories, large-scale spatial data, and environmental data.</li>
+        <li><strong>Urban Walkability and Livable Environment Assessment:</strong> relationships between the built environment, urban spatial quality, and residents' behavior.</li>
+      </ul>
+    </section>
+    <section id="projects-en">
+      <h2>4. Research Projects as Principal Investigator</h2>
+      <p><strong>National Natural Science Foundation of China · Young Scientists Fund (Category C)</strong></p>
+      <p><strong>Research on Urban Street Walkability Optimization and Decision-Making Mechanisms Based on Generative Artificial Intelligence and Augmented Reality.</strong><br>Period: 2026–2028 · Status: ongoing · Role: principal investigator.</p>
+    </section>
+    <section id="papers-en">
+      <h2>5. Selected Publications</h2>
+      <ul>
+        <li>(SSCI; first author) Liang, Y., Rolando, A., Van der Spek, S. (2026). <strong>Toward User-Inclusive, Purpose-Specific, and Context-Sensitive Walkability Measurement: A Review of 46 Instruments Through an Adapted Walking-Needs Framework.</strong> <i>Land</i>, 15, 1168.</li>
+        <li>(SSCI; first author) Liang, Y. (2025). <strong>Active Mobility in the Green Space: A Spatial and Temporal Analysis of Indro Montanelli Park.</strong> <i>Journal of Transport &amp; Health</i>, 42, 102018.</li>
+        <li>(SCI; first author) Liang, Y., Rolando, A., Van der Spek, S. (2025). <strong>Transport Infrastructure Renewal and Active Mobility: A Longitudinal Analysis of Pedestrian and Cyclist Behavior Across Demographic and Temporal Dimensions.</strong> <i>Transportation Planning and Technology</i>, 1–39.</li>
+        <li>Liang, Y., D’Uva, D., Scandiffio, A., Rolando, A. (2022). <strong>The More Walkable, the More Livable? Can Urban Attractiveness Improve Urban Vitality?</strong> <i>Transportation Research Procedia</i>, 60, 322–329.</li>
+        <li>Zheng, H., Guo, Z., Liang, Y. (2019). <strong>Iterative Pattern Design via Decodes Python Scripts in Grasshopper.</strong> <i>Proceedings of the 18th CAAD Futures Conference</i>.</li>
+      </ul>
+    </section>
+    <section id="teaching-en">
+      <h2>6. Teaching Innovation &amp; Educational Research</h2>
+      <ul>
+        <li>(ESCI, Scopus) Liang, Y., et al. (2026). <strong>Integrating Generative AI and WebAR Into Environmental Design Education: A Project-Based Classroom Case Study.</strong> <i>Journal of Information Technology Education: Innovations in Practice (JITE:IIP)</i>. Educational research on <strong>generative AI, WebAR, and project-based learning in environmental design</strong>.</li>
+        <li>梁阳，雷鹏，杨兵，李一媛. <strong>《融合AI与AR的信息设计基础课程项目式教学改革探索——以桂林电子科技大学为例》</strong> (in Chinese; translated title: <strong>Exploring Project-Based Teaching Reform in Fundamentals of Information Design Through AI and AR Integration: A Case Study of Guilin University of Electronic Technology</strong>). Research on AI–AR integration, project-based learning, and curriculum reform in digital media.</li>
+      </ul>
+    </section>
+    <section id="service-en">
+      <h2>7. Academic Service &amp; International Activities</h2>
+      <ul><li><strong>Guest Editor, <i>Sustainable Futures</i>.</strong></li><li><strong>Organizer of City+ 2021@Milan and core organizing committee member of City+ Network</strong>, contributing to international urban research networks and academic exchange.</li></ul>
+    </section>
+    <section id="mentoring-en">
+      <h2>8. Student Mentoring</h2>
+      <ul>
+        <li>Supervised students in the <strong>China College Students' Engineering Practice and Innovation Ability Competition (Virtual Simulation Track · Engineering Scene Digitalization)</strong>, winning <strong>Second Prize in the National Finals and Gold Prize in the Guangxi Regional Competition</strong>. The competition is classified as a <strong>Ministry of Education Category A academic competition</strong>.</li>
+        <li>Supervisor of the regional-level undergraduate innovation and entrepreneurship training project <strong>“银龄回忆录” (Silver-Age Memoirs)</strong>; ongoing.</li>
+        <li>Mentoring undergraduate and master's students in research and innovation involving <strong>generative AI, digital media technology, urban space digitalization, AI-assisted design, and XR applications</strong>.</li>
+      </ul>
+    </section>
+    <section id="honors-en">
+      <h2>9. Selected Honors</h2>
+      <ul><li><strong>2024 · Outstanding Doctoral Graduate, Politecnico di Milano, Italy</strong></li><li><strong>2014 · National Scholarship, Shanghai Jiao Tong University (ranked first in the major)</strong></li><li><strong>2016 · Outstanding Graduate, Shanghai Jiao Tong University</strong></li><li><strong>2019 · Nomination for Outstanding Master's Thesis, College of Architecture and Urban Planning, Tongji University</strong></li><li><strong>2024 · Third Prize, Guangxi Regional Competition, Future Designer National Art and Design Teachers' Teaching Innovation Competition</strong></li></ul>
+    </section>
+    <section id="practice-en">
+      <h2>10. Professional Practice &amp; International Joint Design</h2>
+      <ul><li>Participated in architectural design for major national and local cultural projects, including the <strong>Shanghai Museum East</strong> and the <strong>Erlitou Site Museum of the Xia Capital</strong>.</li><li>Participated in international joint teaching and urban design initiatives, including <strong>Tongji University–University of Melbourne joint design</strong> and <strong>Shanghai Jiao Tong University–KRVIA, Mumbai, India joint design</strong>.</li></ul>
+    </section>
+  </main>
+  <footer>梁阳 · Liang Yang</footer>
+</div>
+<script>
+  function setLang(lang) {
+    if (lang !== 'zh' && lang !== 'en') return;
+    document.querySelectorAll('[data-lang]').forEach(function (element) {
+      element.hidden = element.dataset.lang !== lang;
+    });
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = lang === 'zh' ? '梁阳的主页 | Liang Yang' : 'Liang Yang | Academic Homepage';
+    document.querySelectorAll('.lang-switcher button').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.id === 'lang-' + lang));
+    });
+    if (location.hash) {
+      var base = location.hash.slice(1).replace(/-en$/, '');
+      var target = document.getElementById(base + (lang === 'en' ? '-en' : ''));
+      if (target) {
+        history.replaceState(null, '', '#' + target.id);
       }
-    };
-
-    function setLang(lang) {
-      document.getElementById("name").innerHTML = content[lang].name;
-      document.getElementById("intro").innerHTML = content[lang].intro;
-      document.getElementById("contact").innerHTML = content[lang].contact;
-      document.querySelector("#about h2").innerText = content[lang].aboutTitle;
-      document.querySelector("#about p").innerText = content[lang].aboutText;
-      document.querySelector("#education h2").innerText = content[lang].educationTitle;
-      document.querySelector("#education ul")?.remove();
-      document.querySelector("#education").insertAdjacentHTML("beforeend", content[lang].educationHTML);
-      document.querySelector("#papers h2").innerText = content[lang].papersTitle;
-      document.querySelector("#papers ul")?.remove();
-      document.querySelector("#papers").insertAdjacentHTML("beforeend", content[lang].papersHTML);
     }
-  </script>
+  }
+  if (location.hash.endsWith('-en')) setLang('en');
+</script>
 </body>
 </html>
